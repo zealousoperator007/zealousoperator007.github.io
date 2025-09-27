@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LightningNerds | A Home of User-Friendly Knowledge Dump.</title>
+  <meta name="description" content="Welcome to LightningNerds. A Home for some tech-clingy enthusiasts.">
+  
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="LightningNerds | A Home of User-Friendly Knowledge Dump ">
+  <meta property="og:description" content="Wander, Reinterpret, Etch your own stories—within these depths, knowledge walks without chains. It’s Unfiltered and Unfettered.">
+  <meta property="og:image" content="https://noira.netlify.app/image1234.png">
+  <meta property="og:url" content="https://noira.netlify.app">
+  <meta property="og:type" content="website">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="goku.jpg" type="n">
+  <style>
+    :root {
+      --primary: #ff0055;
+      --secondary: #00a2ff;
+      --accent: #ffcc00;
+      --bg: #f8f8f8;
+      --text: #1a1a1a;
+      --card: #ffffff;
+      --nav: rgba(255,255,255,0.9);
+    }
+
+    .dark {
+      --primary: #ff3366;
+      --secondary: #00ccff;
+      --accent: #ffdd33;
+      --bg: #121212;
+      --text: #f0f0f0;
+      --card: #1e1e1e;
+      --nav: rgba(30,30,30,0.9);
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .pixel-font {
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    #mobileMenu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100vh;
+      background: var(--card);
+      z-index: 40;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+      padding-top: 100px;
+      overflow-y: auto;
+    }
+    
+    #mobileMenu.open {
+      transform: translateY(0);
+    }
+    
+    #mobileMenu a {
+      display: block;
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      color: var(--text);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    #mobileMenu a:hover {
+      background: rgba(0,0,0,0.05);
+      color: var(--primary);
+    }
+    
+    #mobileMenuButton {
+      z-index: 50;
+      padding: 0.5rem;
+      background-color: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    #mobileMenuButton:hover {
+      color: var(--primary);
+    }
+    
+    #mobileMenuButton.open {
+      color: var(--primary);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 40;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 9999px;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(30deg);
+      box-shadow: 0 0 30px var(--primary);
+    }
+
+    .nav-glass {
+      background: var(--nav);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255,0,85,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255,0,85,0.4);
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,162,255,0.3);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,162,255,0.4);
+    }
+
+    .product-card {
+      background: var(--card);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .pixel-border {
+      position: relative;
+      border: 4px solid var(--accent);
+      box-shadow: 0 0 0 4px var(--primary), 0 0 0 8px var(--secondary);
+    }
+
+    .pixel-border::after {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      border: 2px solid var(--accent);
+      pointer-events: none;
+    }
+
+    .glow-text {
+      text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
+      }
+      to {
+        text-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
+      }
+    }
+
+    .typewriter {
+      overflow: hidden;
+      border-right: 3px solid var(--primary);
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: 2px;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--primary) }
+    }
+
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 5px;
+      animation: progress-animation 2s infinite alternate;
+    }
+
+    @keyframes progress-animation {
+      0% { width: 80%; }
+      100% { width: 100%; }
+    }
+
+    .edition-common {
+      border: 2px solid #b0b0b0;
+    }
+
+    .edition-uncommon {
+      border: 2px solid #00cc66;
+    }
+
+    .edition-rare {
+      border: 2px solid #0066ff;
+    }
+
+    .edition-epic {
+      border: 2px solid #9900ff;
+    }
+
+    .edition-legendary {
+      border: 2px solid #ffcc00;
+      animation: legendary-glow 2s infinite alternate;
+    }
+
+    @keyframes legendary-glow {
+      from {
+        box-shadow: 0 0 5px #ffcc00;
+      }
+      to {
+        box-shadow: 0 0 20px #ffcc00;
+      }
+    }
+
+    .achievement-badge {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, var(--card) 0%, var(--bg) 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .achievement-badge:hover {
+      transform: scale(1.1) rotate(10deg);
+    }
+
+    .achievement-badge::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      animation: spin 4s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .tech-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(90deg, var(--bg) 21px, transparent 1%) center,
+        linear-gradient(var(--bg) 21px, transparent 1%) center,
+        var(--primary);
+      background-size: 22px 22px;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .hud-element {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+      border-radius: 4px;
+      padding: 8px 12px;
+      position: relative;
+    }
+    
+    .hud-element::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    /* Confetti animation */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent);
+      opacity: 0;
+      z-index: 9999;
+      animation: confetti-fall 5s linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Digital noise effect */
+    .digital-noise::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(18, 16, 16, 0.1) 50%, rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 4px, 3px 100%;
+      pointer-events: none;
+      opacity: 0.15;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-content {
+        padding-top: 80px;
+      }
+      
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .product-card {
+        margin-bottom: 20px;
+      }
+      
+      .team-member {
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .btn-primary, .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+      
+      .product-card {
+        margin-bottom: 15px;
+      }
+    }
+    /* Animated icon styles */
+    .animated-icon { font-size: 2.5rem; transition: transform 0.3s; }
+    .animated-icon:hover { transform: scale(1.2) rotate(-10deg); animation: bounce 0.6s; }
+    @keyframes bounce { 0%, 100% { transform: scale(1.2) rotate(-10deg) translateY(0); } 50% { transform: scale(1.3) rotate(10deg) translateY(-10px); } }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .product-item { background: var(--card); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: box-shadow 0.3s, transform 0.3s; position: relative; }
+    .product-item:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.16); transform: translateY(-6px) scale(1.03); }
+    .product-label { margin-top: 1rem; font-weight: 600; font-size: 1.1rem; letter-spacing: 1px; text-align: center; }
+    @media (max-width: 600px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+    /* Icon click animations */
+    .animate-trophy { animation: spin-trophy 1s linear; }
+    @keyframes spin-trophy { 0% { transform: rotate(0); } 100% { transform: rotate(720deg); } }
+    .animate-mug { animation: steam-mug 1s linear; }
+    @keyframes steam-mug { 0% { filter: brightness(1); } 50% { filter: brightness(2); transform: scale(1.2) translateY(-10px); } 100% { filter: brightness(1); transform: none; } }
+    .animate-polaroid { animation: shake-polaroid 0.7s cubic-bezier(.36,.07,.19,.97) both; }
+    @keyframes shake-polaroid { 10%, 90% { transform: translateX(-2px); } 20%, 80% { transform: translateX(4px); } 30%, 50%, 70% { transform: translateX(-8px); } 40%, 60% { transform: translateX(8px); } }
+    .animate-key { animation: swing-key 1s ease; }
+    @keyframes swing-key { 20% { transform: rotate(-20deg); } 40% { transform: rotate(15deg); } 60% { transform: rotate(-10deg); } 80% { transform: rotate(5deg); } 100% { transform: rotate(0deg); } }
+    .animate-sticker { animation: pop-sticker 0.6s cubic-bezier(.36,.07,.19,.97) both; }
+    @keyframes pop-sticker { 0% { transform: scale(1); } 50% { transform: scale(1.3) rotate(-10deg); } 100% { transform: scale(1); } }
+    .animate-poster { animation: flip-poster 0.8s; }
+    @keyframes flip-poster { 0% { transform: rotateY(0); } 50% { transform: rotateY(180deg); } 100% { transform: rotateY(0); } }
+    .animate-cap { animation: bounce-cap 0.7s; }
+    @keyframes bounce-cap { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px) scale(1.2); } }
+    .animate-bottle { animation: shake-bottle 0.7s; }
+    @keyframes shake-bottle { 10%, 90% { transform: translateX(-2px); } 20%, 80% { transform: translateX(4px); } 30%, 50%, 70% { transform: translateX(-8px); } 40%, 60% { transform: translateX(8px); } }
+    .animate-phonecase { animation: pulse-phonecase 0.7s; }
+    @keyframes pulse-phonecase { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+    .animate-phoneskin { animation: wave-phoneskin 0.8s; }
+    @keyframes wave-phoneskin { 0% { transform: skewX(0); } 25% { transform: skewX(15deg); } 50% { transform: skewX(-15deg); } 75% { transform: skewX(10deg); } 100% { transform: skewX(0); } }
+    .animate-web { animation: spin-web 1s linear; }
+    @keyframes spin-web { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+    .animate-bookmark { animation: bounce-bookmark 0.7s; }
+    @keyframes bounce-bookmark { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    .animate-popsocket { animation: pop-popsocket 0.6s; }
+    @keyframes pop-popsocket { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+    .animate-photoframe { animation: shake-photoframe 0.7s; }
+    @keyframes shake-photoframe { 10%, 90% { transform: translateX(-2px); } 20%, 80% { transform: translateX(4px); } 30%, 50%, 70% { transform: translateX(-8px); } 40%, 60% { transform: translateX(8px); } }
+    .animate-powerbank { animation: flash-powerbank 0.7s; }
+    @keyframes flash-powerbank { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(2); } }
+    .animate-mug { animation: steam-mug 1s linear; }
+    .animate-led { animation: glow-led 1s alternate infinite; }
+    @keyframes glow-led { 0% { filter: brightness(1); } 100% { filter: brightness(2); } }
+    .animate-flex { animation: wave-flex 0.8s; }
+    @keyframes wave-flex { 0% { transform: skewY(0); } 25% { transform: skewY(10deg); } 50% { transform: skewY(-10deg); } 75% { transform: skewY(5deg); } 100% { transform: skewY(0); } }
+    .animate-medal { animation: swing-medal 1s ease; }
+    @keyframes swing-medal { 20% { transform: rotate(-20deg); } 40% { transform: rotate(15deg); } 60% { transform: rotate(-10deg); } 80% { transform: rotate(5deg); } 100% { transform: rotate(0deg); } }
+  </style>
+</head>
+<body class="dark">
+  <!-- Theme Toggle Button -->
+  <div class="theme-toggle" id="themeToggle">
+    <i class="fas fa-moon" id="themeIcon"></i>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-50 py-4 px-6 flex justify-between items-center">
+    <div class="flex items-center mx-auto">
+      <img src="goku.jpg" alt="NERDS Logo" class="h-12 mr-4">
+      <h1 class="text-xl font-bold pixel-font glow-text">LightningNerds</h1>
+    </div>
+  </nav>
+
+  <!-- Hero Section (unchanged) -->
+  <section class="relative overflow-hidden pt-32 pb-20 px-6 digital-noise" style="scroll-margin-top:100px;">
+    <div class="tech-grid"></div>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div class="z-10">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <span class="text-primary">UNLOCK</span> YOUR<br>
+          <span class="text-primary">DIGITAL</span>
+          <span class="text-primary"> MANUSCRIPTS</span>
+          <span class="typewriter">ARCHIVE</span>
+
+
+        </h1>
+        <p class="text-lg md:text-xl mb-8 opacity-90">Wander, Reinterpret, Etch your own stories—within these depths, knowledge walks without chains. It’s Unfiltered and Unfettered.</p>
+      </div>
+      <div class="relative floating">
+        <div class="pixel-border edition-legendary p-4 bg-card">
+          <a href="archive.org" target="_blank" rel="noopener noreferrer">
+            <img src="yo.jpg" alt="Nerd Class" class="w-full h-auto rounded-lg">
+          </a>
+        </div>
+        <div class="absolute -top-10 -right-10 achievement-badge">
+          <i class="fas fa-trophy text-3xl text-accent"></i>
+        </div>
+      </div>
+    </div>
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+      <div class="absolute top-1/4 left-1/4 w-16 h-16 rounded-full bg-primary opacity-20 animate-pulse"></div>
+      <div class="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-secondary opacity-20 animate-pulse delay-300"></div>
+      <div class="absolute bottom-1/4 left-1/3 w-20 h-20 rounded-full bg-accent opacity-20 animate-pulse delay-700"></div>
+    </div>
+  </section>
+
+  <!-- Manuscripts -->
+  <section class="px-6 py-16 max-w-6xl mx-auto">
+    <div class="product-grid">
+      <a href='/polaroid-detail' style='text-decoration:none;color:inherit;'><div class="product-item"><i class="fas fa-camera-retro animated-icon text-primary" data-anim="polaroid"></i><div class="product-label">Write Your Own</div></div></a>
+      <div class="product-item"><i class="fas fa-key animated-icon text-accent" data-anim="key"></i><div class="product-label">Premium Key(Admins Only)</div></div>
+      <div class="product-item"><i class="fas fa-sticky-note animated-icon text-secondary" data-anim="book"></i><div class="product-label">Books</div></div>
+      <div class="product-item"><i class="fas fa-image animated-icon text-primary" data-anim="poster"></i><div class="product-label">Posters(Online Shopping)</div></div>
+      <div class="product-item"><i class="fas fa-hat-cowboy animated-icon text-accent" data-anim="cap"></i><div class="product-label">Archives</div></div>
+      <div class="product-item"><i class="fas fa-globe animated-icon text-accent" data-anim="web"></i><div class="product-label">Websites</div></div>
+      <div class="product-item"><i class="fas fa-bookmark animated-icon text-secondary" data-anim="bookmark"></i><div class="product-label">Bookmarks</div></div>
+      <div class="product-item"><i class="fas fa-scroll animated-icon text-secondary" data-anim="flex"></i><div class="product-label">Goal</div></div>
+      <div class="product-item"><i class="fas fa-medal animated-icon text-primary" data-anim="medal"></i><div class="product-label">Honored Courses</div></div>
+      <div class="product-item"><i class="fas fa-trophy animated-icon text-accent" data-anim="trophy"></i><div class="product-label">Achievables</div></div>
+    </div>
+  </section>
+
+  <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const body = document.body;
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      if (body.classList.contains('dark')) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      }
+    });
+
+    // Icon click animation logic
+    const animMap = {
+      polaroid: 'animate-polaroid',
+      key: 'animate-key',
+      sticker: 'animate-sticker',
+      poster: 'animate-poster',
+      cap: 'animate-cap',
+      bottle: 'animate-bottle',
+      phonecase: 'animate-phonecase',
+      phoneskin: 'animate-phoneskin',
+      web: 'animate-web',
+      bookmark: 'animate-bookmark',
+      popsocket: 'animate-popsocket',
+      photoframe: 'animate-photoframe',
+      powerbank: 'animate-powerbank',
+      mug: 'animate-mug',
+      led: 'animate-led',
+      flex: 'animate-flex',
+      medal: 'animate-medal',
+      trophy: 'animate-trophy',
+    };
+    document.querySelectorAll('.product-item').forEach(item => {
+      item.addEventListener('click', function() {
+        const icon = item.querySelector('.animated-icon');
+        if (!icon) return;
+        const anim = animMap[icon.dataset.anim];
+        if (!anim) return;
+        icon.classList.remove(anim); // reset if already animating
+        void icon.offsetWidth; // force reflow
+        icon.classList.add(anim);
+        setTimeout(() => icon.classList.remove(anim), 1000);
+      });
+    });
+  </script>
+</body>
+</html>
